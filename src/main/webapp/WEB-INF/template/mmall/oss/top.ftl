@@ -172,48 +172,6 @@
                         <a href="frame/system_main.jhtml" target="mainFrame">系统</a>
                       </li>
                     </@oss_perm>
-                    <@oss_perm url="/frame/music_main.jhtml">
-                      <li class="sep"></li>
-                      <li class="normal" id="tb_13">
-                        <a href="frame/music_main.jhtml" target="mainFrame">曲库</a>
-                      </li>
-                    </@oss_perm>
-                    <@oss_perm url="/frame/category_main.jhtml">
-                       <li class="sep"></li>
-                       <li class="normal" id="tb_14">
-                        <a href="frame/category_main.jhtml" target="mainFrame">分类</a>
-                       </li>
-                    </@oss_perm>
-                    <@oss_perm url="/frame/story_main.jhtml">
-                       <li class="sep"></li>
-                       <li class="normal" id="tb_15">
-                        <a href="frame/story_main.jhtml" target="mainFrame">故事</a>
-                       </li>
-                    </@oss_perm>
-                    <@oss_perm url="/frame/user_main.jhtml">
-                      <li class="sep"></li>
-                      <li class="normal" id="tb_16">
-                        <a href="frame/user_main.jhtml" target="mainFrame">用户</a>
-                      </li>
-                    </@oss_perm>
-                    <@oss_perm url="/frame/support_main.jhtml">
-                      <li class="sep"></li>
-                      <li class="normal" id="tb_17">
-                        <a href="frame/support_main.jhtml" target="mainFrame">维护</a>
-                      </li>
-                    </@oss_perm>
-                    <@oss_perm url="/frame/resource_main.jhtml">
-                      <li class="sep"></li>
-                      <li class="normal" id="tb_18">
-                        <a href="frame/resource_main.jhtml" target="mainFrame">资源</a>
-                      </li>
-                    </@oss_perm>
-                    <#--<@oss_perm url="/frame/client_user_main.jhtml">-->
-                      <#--<li class="sep"></li>-->
-                      <#--<li class="normal" id="tb_18">-->
-                        <#--<a href="frame/client_user_main.jhtml" target="mainFrame">用户</a>-->
-                      <#--</li>-->
-                    <#--</@oss_perm>-->
                     </ul>
                   </td>
                 </tr>

@@ -41,6 +41,11 @@ public final class Constants {
         return propertiesLoader.getProperty("resource.url.prefix");
     }
 
+    /** @return 获取QMS资源路径前缀 */
+    public static String getQmsSourceUriPrefix() {
+        return getResourceUriPrefix() + "/qms";
+    }
+
     /** @return 获取资源路径前缀 */
     public static String getResourceUriPrefix() {
         return propertiesLoader.getProperty("resource.uri.prefix");

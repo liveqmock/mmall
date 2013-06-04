@@ -65,7 +65,7 @@
     <bean id="freemarkerViewResolver" class="cn.kxai.common.web.springmvc.FreeMarkerSimpleViewResolver">
         <property name="prefix" value="/mmall/simple/" />
         <property name="suffix" value=".ftl" />
-        <property name="contentType" value="text/html; charset=UTF-8" />
+        <property name="contentType" value="text/vnd.wap.wml;charset=utf-8" />
         <property name="exposeRequestAttributes" value="false" />
         <property name="exposeSessionAttributes" value="false" />
         <property name="exposeSpringMacroHelpers" value="true" />
