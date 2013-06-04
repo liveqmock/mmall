@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    //上传附件
+    function uploadMedia(n) {
+        var mf = $("#mediaFile" + n);
+        //检查是否选择了文件
+        if (mf.val() == "") {
+            alert("请先选择文件");
+            return;
+        }
+        //将file移动至上传表单
+        $("#mediaContent").empty();
+        $("#mediaContent").append(mf);
+        //复制一个file放至原处
+        $("#mfc" + n).append(mf.clone().attr('value', ''));
+        //修改属性
+        mf.attr("id", "");
+        mf.attr("name", "uploadFile");
+        $("#mediaFileText" + n).attr('value', '');
+        //其他表单
+        $("#mediaFilename").val($("#origFilename" + n).val());
+        $("#mediaUploadNum").val(n);
+        $("#mediaForm").submit();
+    }
+</script>
+<form id="mediaForm" action="../common/o_upload_media.jhtml" method="post" enctype="multipart/form-data"
+      target="media_iframe"
+      style="display:none;width:0;height:0;">
+    <span id="mediaContent"></span>
+    <input type="hidden" id="mediaFilename" name="filename"/>
+    <input id="mediaUploadNum" type="hidden" name="uploadNum"/>
+</form>
+<iframe name="media_iframe" frameborder="0" border="0" style="display:none;width:0;height:0;"></iframe>

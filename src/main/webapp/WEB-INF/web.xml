@@ -24,17 +24,31 @@
     </listener>
 
     <servlet>
-        <servlet-name>MMALL_WS</servlet-name>
+        <servlet-name>MMALL_COLOR</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/mmall-ws.xml</param-value>
+            <param-value>/WEB-INF/mmall-color.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MMALL_WS</servlet-name>
-        <url-pattern>/mmall/ws/*</url-pattern>
+        <servlet-name>MMALL_COLOR</servlet-name>
+        <url-pattern>/mmall/c/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MMALL_SIMPLE</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/mmall-simple.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MMALL_SIMPLE</servlet-name>
+        <url-pattern>/mmall/s/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -44,7 +58,7 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/mmall-oss.xml</param-value>
         </init-param>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>3</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>MMALL_OSS</servlet-name>

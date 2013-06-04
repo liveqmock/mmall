@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    //上传附件
+    function uploadFile(n) {
+        var f = $("#file" + n);
+        //检查是否选择了文件
+        if (f.val() == "") {
+            alert("请先选择文件");
+            return;
+        }
+        //将file移动至上传表单
+        $("#fileContent").empty();
+        $("#fileContent").append(f);
+        //复制一个file放至原处
+        $("#fc" + n).append(f.clone().attr('value', ''));
+        //修改属性
+        f.attr("id", "");
+        f.attr("name", "uploadFile");
+        $("#fileText" + n).attr('value', '');
+        //其他表单
+        $("#filename").val($("#origFilename" + n).val());
+        $("#fileUploadNum").val(n);
+        $("#fileForm").submit();
+    }
+</script>
+<form id="fileForm" action="../common/o_upload_file.jhtml" method="post" enctype="multipart/form-data"
+      target="file_iframe"
+      style="display:none;width:0;height:0;">
+    <span id="fileContent"></span>
+    <input type="hidden" id="filename" name="filename"/>
+    <input id="fileUploadNum" type="hidden" name="uploadNum"/>
+</form>
+<iframe name="file_iframe" frameborder="0" border="0" style="display:none;width:0;height:0;"></iframe>

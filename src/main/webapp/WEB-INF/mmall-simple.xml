@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <!-- 自动扫描且只扫描@Controller -->
-    <context:component-scan base-package="net.mm2018.mmall.ws.web.controller" use-default-filters="false">
+    <context:component-scan base-package="net.mm2018.mmall.mobile.web.controller.simple" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
         <context:include-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice" />
@@ -33,33 +33,17 @@
         </property>
     </bean>
 
-    <bean id="wsContextInterceptor" class="net.mm2018.mmall.ws.web.interceptor.WSContextInterceptor">
-        <property name="auth" value="false" />
-        <property name="excludeUrls">
-            <list>
-                <value>/error4sv.json</value>
-                <value>/error4token.json</value>
-            </list>
-        </property>
-    </bean>
+    <bean id="mobileContextInterceptor" class="net.mm2018.mmall.mobile.web.interceptor.MobileContextInterceptor" />
 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
-            <ref local="wsContextInterceptor" />
+            <ref local="mobileContextInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!--json过滤标签-->
-    <bean id="json_escape" class="net.mm2018.mmall.ws.web.directive.JsonEscapeDirective" />
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/template" />
-        <property name="freemarkerVariables">
-            <map>
-                <!--文本转码-->
-                <entry key="json_escape" value-ref="json_escape" />
-            </map>
-        </property>
         <property name="freemarkerSettings">
             <props>
                 <prop key="tag_syntax">auto_detect</prop>
@@ -73,13 +57,13 @@
                 <prop key="time_format">HH:mm:ss</prop>
                 <prop key="number_format">0.######</prop>
                 <prop key="whitespace_stripping">true</prop>
-                <prop key="auto_import">/mmall/ws/ftl_lib/index.ftl as t</prop>
+                <prop key="auto_import">/mmall/simple/ftl_lib/index.ftl as s</prop>
             </props>
         </property>
     </bean>
 
     <bean id="freemarkerViewResolver" class="cn.kxai.common.web.springmvc.FreeMarkerSimpleViewResolver">
-        <property name="prefix" value="/mmall/ws/" />
+        <property name="prefix" value="/mmall/simple/" />
         <property name="suffix" value=".ftl" />
         <property name="contentType" value="text/html; charset=UTF-8" />
         <property name="exposeRequestAttributes" value="false" />
