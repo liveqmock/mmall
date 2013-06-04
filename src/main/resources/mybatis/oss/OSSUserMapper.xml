@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mm2018.mmall.oss.dao.OSSUserDao">
+
+    <cache />
+
+    <resultMap id="ossUserMap" type="OSSUser">
+        <id property="userId" column="user_id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="registerTime" column="register_time" />
+        <result property="registerIP" column="register_ip" />
+        <result property="lastLoginTime" column="last_login_time" />
+        <result property="lastLoginIP" column="last_login_ip" />
+        <result property="loginCount" column="login_count" />
+        <result property="errorTime" column="error_time" />
+        <result property="errorCount" column="error_count" />
+        <result property="errorIP" column="error_ip" />
+        <result property="rank" column="rank" />
+        <result property="admin" column="is_admin" />
+        <result property="viewonlyAdmin" column="is_viewonly_admin" />
+        <result property="selfAdmin" column="is_self_admin" />
+        <result property="disabled" column="is_disabled" />
+        <association property="ossUserExt" column="user_id" javaType="OSSUserExt"
+                     select="findUserExtByUserId" />
+        <collection property="roles" column="user_id" javaType="java.util.HashSet" ofType="OSSRole"
+                    select="net.mm2018.mmall.oss.dao.OSSRoleDao.findRolesByUserId" />
+    </resultMap>
+
+    <!--根据主键ID获取后台用户: 输出直接映射到对象-->
+    <select id="findById" parameterType="int" resultMap="ossUserMap">
+        SELECT
+            *
+        FROM oss_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 根据用户名获取后台用户: 输出直接映射到对象 -->
+    <select id="findByUsername" parameterType="string" resultMap="ossUserMap">
+        SELECT
+            *
+        FROM oss_user
+        WHERE username = #{username}
+    </select>
+
+    <!--查询用户.1.输入用map传入多个参数 2.<where>语句, 智能添加where和and关键字-->
+    <select id="findListByQuery" parameterType="map" resultMap="ossUserMap">
+        SELECT *
+        FROM oss_user
+        <where>
+            1 = 1
+            <if test="queryUsername != null">
+                AND username LIKE '%#{queryUsername}%'
+            </if>
+            <if test="queryEmail != null">
+                AND email LIKE '%#{queryEmail}%'
+            </if>
+            <if test="queryDisabled != null">
+                AND is_disabled = #{queryDisabled}
+            </if>
+            <if test="admin != null">
+                AND is_admin = #{admin}
+            </if>
+            <if test="rank != null">
+                AND rank &lt;= #{rank}
+            </if>
+        </where>
+        ORDER BY user_id DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!--查询用户数量.1.输入用map传入多个参数 2.<where>语句, 智能添加where和and关键字-->
+    <select id="countListByQuery" parameterType="map" resultType="int">
+        SELECT count(0)
+        FROM oss_user
+        <where>
+            1 = 1
+            <if test="queryUsername != null">
+                AND username LIKE '%#{queryUsername}%'
+            </if>
+            <if test="queryEmail != null">
+                AND email LIKE '%#{queryEmail}%'
+            </if>
+            <if test="queryDisabled != null">
+                AND is_disabled = #{queryDisabled}
+            </if>
+            <if test="admin != null">
+                AND is_admin = #{admin}
+            </if>
+            <if test="rank != null">
+                AND rank &lt;= #{rank}
+            </if>
+        </where>
+    </select>
+
+    <!--更新后台用户登录信息-->
+    <update id="updateLoginInfo" parameterType="OSSUser">
+        UPDATE oss_user
+        SET last_login_time = #{lastLoginTime}, last_login_ip = #{lastLoginIP}, login_count = #{loginCount}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--更新后台用户登录成功信息-->
+    <update id="updateLoginSuccess" parameterType="OSSUser">
+        UPDATE oss_user
+        SET last_login_time = #{lastLoginTime}, last_login_ip = #{lastLoginIP}, login_count = #{loginCount}, error_time = #{errorTime}, error_count = #{errorCount}, error_ip = #{errorIP}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--更新后台用户登录错误信息-->
+    <update id="updateLoginError" parameterType="OSSUser">
+        UPDATE oss_user
+        SET error_time = #{errorTime}, error_count = #{errorCount}, error_ip = #{errorIP}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--更新密码邮箱-->
+    <update id="updatePwdEmail" parameterType="OSSUser">
+        UPDATE oss_user
+        SET password = #{password}, email = #{email}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--保存用户, 由数据库生成id并赋值到user对象-->
+    <insert id="saveUser" parameterType="OSSUser" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO oss_user (username, password, email, register_time, register_ip, last_login_time, last_login_ip, login_count, error_time, error_count, error_ip, rank, is_admin, is_viewonly_admin, is_self_admin, is_disabled) VALUES (#{username}, #{password}, #{email}, #{registerTime}, #{registerIP}, #{lastLoginTime}, #{lastLoginIP}, #{loginCount}, #{errorTime}, #{errorCount}, #{errorIP}, #{rank}, #{admin}, #{viewonlyAdmin}, #{selfAdmin}, #{disabled})
+    </insert>
+
+    <!--删除用户-->
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM oss_user
+        WHERE user_id = #{userId}
+    </delete>
+
+    <!--更新用户-->
+    <update id="update" parameterType="OSSUser">
+        UPDATE oss_user
+        SET email = #{email}, password = #{password}, rank = #{rank}, is_viewonly_admin = #{viewonlyAdmin}, is_self_admin = #{selfAdmin}, is_disabled = #{disabled}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--根据用户ID获取扩展信息-->
+    <select id="findUserExtByUserId" parameterType="int" resultType="OSSUserExt" useCache="true">
+        SELECT
+            user_id   AS userId,
+            real_name AS realName,
+            gender,
+            birthday,
+            intro,
+            qq,
+            msn,
+            phone,
+            mobile,
+            user_img  AS userImg
+        FROM oss_user_ext
+        WHERE user_id = #{userId}
+    </select>
+
+    <!--更新用户扩展信息-->
+    <update id="updateUserExt" parameterType="OSSUserExt">
+        UPDATE oss_user_ext
+        SET real_name = #{realName}, gender = #{gender}, birthday = #{birthday}, intro = #{intro}, qq = #{qq}, msn = #{msn}, phone = #{phone}, mobile = #{mobile}, user_img = #{userImg}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!--保存用户扩展信息-->
+    <insert id="saveUserExt" parameterType="OSSUserExt">
+        INSERT INTO oss_user_ext VALUES (#{userId}, #{realName}, #{gender}, #{birthday}, #{intro}, #{qq}, #{msn}, #{phone}, #{mobile}, #{userImg})
+    </insert>
+
+    <!--删除用户扩展-->
+    <delete id="deleteUserExtById" parameterType="int">
+        DELETE FROM oss_user_ext
+        WHERE user_id = #{userId}
+    </delete>
+
+    <!--保存用户角色-->
+    <insert id="saveUserRole" parameterType="map">
+        INSERT INTO oss_user_role VALUES (#{userId}, #{roleId})
+    </insert>
+
+    <!--根据用户ID删除-->
+    <delete id="deleteUserRoleByUserId" parameterType="int">
+        DELETE FROM oss_user_role
+        WHERE user_id = #{userId}
+    </delete>
+</mapper>

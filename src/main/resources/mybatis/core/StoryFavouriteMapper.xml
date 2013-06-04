@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.StoryFavouriteDao">
+
+    <!-- 根据用户ID获取故事ID列表 -->
+    <select id="findStoryIdListByUserId" parameterType="int" resultType="int">
+        SELECT
+            story_id
+        FROM qms_story_favourite
+        WHERE user_id = #{userId}
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="map">
+        INSERT INTO qms_story_favourite (story_id, user_id, create_time) VALUES (#{storyId}, #{userId}, #{createTime})
+    </insert>
+
+    <!-- 根据故事ID和用户ID删除 -->
+    <delete id="deleteByStoryIdNUserId" parameterType="map">
+        DELETE FROM qms_story_favourite
+        WHERE story_id = #{storyId} AND user_id = #{userId}
+    </delete>
+
+    <!-- 根据故事ID和用户ID计算收藏数 -->
+    <select id="countByStoryIdNUserId" parameterType="map" resultType="int">
+        SELECT
+            count(0)
+        FROM qms_story_favourite
+        WHERE story_id = #{storyId} AND user_id = #{userId}
+    </select>
+
+    <!-- 根据故事ID计算收藏数 -->
+    <select id="countByStoryId" parameterType="int" resultType="int">
+        SELECT
+            count(0)
+        FROM qms_story_favourite
+        WHERE story_id = #{storyId}
+    </select>
+</mapper>

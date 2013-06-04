@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.TopicDao">
+
+    <!-- 根据ID查找专题 -->
+    <select id="findByTopicId" parameterType="int" resultType="Topic">
+        SELECT
+            topic_id    AS topicId,
+            topic_name  AS topicName,
+            description,
+            image_uri   AS imageUri,
+            priority,
+            is_display  AS display,
+            create_time AS createTime
+        FROM qms_topic
+        WHERE topic_id = #{topicId}
+    </select>
+
+    <!-- 计算列表对象数量 -->
+    <select id="countListByQuery" parameterType="map" resultType="int">
+        SELECT
+            count(0)
+        FROM qms_topic
+    </select>
+
+    <!-- 根据条件查找列表 -->
+    <select id="findListByQuery" parameterType="map" resultType="Topic">
+        SELECT
+            topic_id    AS topicId,
+            topic_name  AS topicName,
+            description,
+            image_uri   AS imageUri,
+            priority,
+            is_display  AS display,
+            create_time AS createTime
+        FROM qms_topic
+        ORDER BY priority ASC, topic_id DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="Topic">
+        INSERT INTO qms_topic (topic_id, topic_name, description, image_uri, priority, is_display, create_time) VALUES (#{topicId}, #{topicName}, #{description}, #{imageUri}, #{priority}, #{display}, #{createTime})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="Topic">
+        UPDATE qms_topic
+        SET topic_name = #{topicName}, description = #{description}, image_uri = #{imageUri}, priority = #{priority}, is_display = #{display}
+        WHERE topic_id = #{topicId}
+    </update>
+
+    <!-- 根据专题ID删除专题 -->
+    <delete id="deleteByTopicId" parameterType="int">
+        DELETE FROM qms_topic
+        WHERE topic_id = #{topicId}
+    </delete>
+
+    <!-- 更新排序 -->
+    <update id="updatePriority" parameterType="map">
+        UPDATE qms_topic
+        SET priority = #{priority}
+        WHERE topic_id = #{topicId}
+    </update>
+
+    <!-- 查找最新列表用于与故事建立联系 -->
+    <select id="findList4Story" parameterType="int" resultType="Topic">
+        SELECT
+            topic_id    AS topicId,
+            topic_name  AS topicName,
+            description,
+            image_uri   AS imageUri,
+            priority,
+            is_display  AS display,
+            create_time AS createTime
+        FROM qms_topic
+        ORDER BY topic_id DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 根据专题ID列表查找专题 -->
+    <select id="findListByTopicIdList" parameterType="map" resultType="Topic">
+        SELECT
+        topic_id AS topicId,
+        topic_name AS topicName,
+        description,
+        image_uri AS imageUri,
+        priority,
+        is_display AS display,
+        create_time AS createTime
+        FROM qms_topic
+        <where>
+            topic_id IN (
+            <foreach collection="topicIdList" item="topicId" index="index">
+                <if test="index &gt; 0">,</if>
+                #{topicId}
+            </foreach>
+            )
+        </where>
+        ORDER BY topic_id DESC
+    </select>
+
+    <!-- 查找最新专题 -->
+    <select id="findLatest" parameterType="map" resultType="Topic">
+        SELECT
+            topic_id    AS topicId,
+            topic_name  AS topicName,
+            description,
+            image_uri   AS imageUri,
+            create_time AS createTime
+        FROM qms_topic
+        WHERE is_display = TRUE
+        ORDER BY topic_id DESC
+        LIMIT 1
+    </select>
+
+    <!-- 更新显示状态 -->
+    <update id="updateDisplay" parameterType="map">
+        UPDATE qms_topic
+        SET is_display = #{display}
+        WHERE topic_id = #{topicId}
+    </update>
+</mapper>

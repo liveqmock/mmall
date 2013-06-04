@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.StoryCoverDao">
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="map">
+        INSERT INTO qms_story_cover (story_id, sort_time) VALUES (#{storyId}, #{sortTime})
+        ON DUPLICATE KEY UPDATE sort_time = #{sortTime}
+    </insert>
+
+    <!-- 根据故事ID删除 -->
+    <delete id="deleteByStoryId" parameterType="int">
+        DELETE FROM qms_story_cover
+        WHERE story_id = #{storyId}
+    </delete>
+
+    <!-- 计算列表长度 -->
+    <select id="countList" resultType="int">
+        SELECT
+            count(0)
+        FROM qms_story_cover
+    </select>
+
+    <!-- 获取故事ID列表 -->
+    <select id="findStoryIdList" parameterType="map" resultType="int">
+        SELECT
+            story_id
+        FROM qms_story_cover
+        ORDER BY sort_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+</mapper>

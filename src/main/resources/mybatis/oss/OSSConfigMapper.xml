@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mm2018.mmall.oss.dao.OSSConfigDao">
+
+    <!-- 获取所有后台配置 -->
+    <select id="findAll" resultType="OSSConfig" useCache="true">
+        SELECT
+            cfg_key   AS cfgKey,
+            cfg_value AS cfgValue
+        FROM oss_config
+    </select>
+
+    <!-- 根据key获取配置 -->
+    <select id="findByKey" parameterType="string" resultType="OSSConfig">
+        SELECT
+            cfg_key   AS cfgKey,
+            cfg_value AS cfgValue
+        FROM oss_config
+        WHERE cfg_key = #{cfgKey}
+    </select>
+
+    <!--根据key获取value-->
+    <select id="findValueByKey" parameterType="string" resultType="string">
+        SELECT
+            cfg_value AS cfgValue
+        FROM oss_config
+        WHERE cfg_key = #{cfgKey}
+    </select>
+
+    <!-- 保存配置 -->
+    <insert id="save" parameterType="OSSConfig">
+        INSERT INTO oss_config VALUES (#{cfgKey}, #{cfgValue})
+    </insert>
+
+    <!-- 更新配置 -->
+    <update id="update" parameterType="OSSConfig">
+        UPDATE oss_config
+        SET cfg_value = #{cfgValue}
+        WHERE cfg_key = #{cfgKey}
+    </update>
+</mapper>

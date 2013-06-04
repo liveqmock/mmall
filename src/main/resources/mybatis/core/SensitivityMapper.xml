@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.SensitivityDao">
+
+    <!-- 根据敏感词ID删除 -->
+    <delete id="deleteBySensitivityId" parameterType="int">
+        DELETE FROM qms_sensitivity
+        WHERE sensitivity_id = #{sensitivityId}
+    </delete>
+
+    <!-- 根据敏感词ID查找 -->
+    <select id="findBySensitivityId" parameterType="int" resultType="Sensitivity">
+        SELECT
+            sensitivity_id AS sensitivityId,
+            search,
+            replacement
+        FROM qms_sensitivity
+        WHERE sensitivity_id = #{sensitivityId}
+    </select>
+
+    <!-- 计算列表对象数量 -->
+    <select id="countListByQuery" parameterType="map" resultType="int">
+        SELECT count(0) FROM qms_sensitivity
+        <where>
+            1 = 1
+            <if test="null != querySearch and querySearch != ''">
+                AND search LIKE concat('%', #{querySearch}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据条件查找专辑列表 -->
+    <select id="findListByQuery" parameterType="map" resultType="Sensitivity">
+        SELECT
+        sensitivity_id AS sensitivityId,
+        search,
+        replacement
+        FROM qms_sensitivity
+        <where>
+            1 = 1
+            <if test="null != querySearch and querySearch != ''">
+                AND search LIKE concat('%', #{querySearch}, '%')
+            </if>
+        </where>
+        ORDER BY sensitivity_id DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="Sensitivity">
+        INSERT INTO qms_sensitivity (sensitivity_id, search, replacement) VALUES (#{sensitivityId}, #{search}, #{replacement})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="Album">
+        UPDATE qms_sensitivity
+        SET search = #{search}, replacement = #{replacement}
+        WHERE sensitivity_id = #{sensitivityId}
+    </update>
+
+    <!-- 查找所有 -->
+    <select id="findAll" resultType="Sensitivity">
+        SELECT
+            sensitivity_id AS sensitivityId,
+            search,
+            replacement
+        FROM qms_sensitivity
+    </select>
+</mapper>

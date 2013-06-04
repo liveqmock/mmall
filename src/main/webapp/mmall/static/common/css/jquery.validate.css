@@ -1,0 +1,9 @@
+label.error {
+    color: red;
+    display: block;
+    padding: 3px 0;
+}
+
+label.generated {
+    display: none;
+}

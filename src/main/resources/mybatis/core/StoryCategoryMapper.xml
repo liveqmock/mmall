@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.StoryCategoryDao">
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="map">
+        INSERT INTO qms_story_category (story_id, category_id) VALUES (#{storyId}, #{categoryId})
+    </insert>
+
+    <!-- 根据分类ID删除 -->
+    <delete id="deleteByCategoryId" parameterType="int">
+        DELETE FROM qms_story_category
+        WHERE category_id = #{categoryId}
+    </delete>
+
+    <!-- 根据故事ID删除 -->
+    <delete id="deleteByStoryId" parameterType="int">
+        DELETE FROM qms_story_category
+        WHERE story_id = #{storyId}
+    </delete>
+
+    <!-- 根据故事ID获取分类ID列表 -->
+    <select id="findCategoryIdListByStoryId" parameterType="int" resultType="int">
+        SELECT
+            category_id
+        FROM qms_story_category
+        WHERE story_id = #{storyId}
+    </select>
+
+    <!-- 根据分类ID和发布时间获取推荐的故事 -->
+    <select id="findListByCategoryIds" parameterType="map" resultType="Story">
+        SELECT
+        sc.story_id AS storyId,
+        sc.category_id as categoryId
+        FROM qms_story_category sc, qms_story s
+        WHERE sc.story_id = s.story_id AND s.is_recommend = #{recommend} AND
+        s.status = #{status} and s.release_time &gt; ${releaseTime}
+        <if test="null != categoryIds">
+            AND sc.category_id IN (
+            <foreach collection="categoryIds" item="categoryId" index="index">
+                <if test="index &gt; 0">,</if>
+                #{categoryId}
+            </foreach>
+            )
+        </if>
+        ORDER BY s.release_time DESC
+    </select>
+</mapper>

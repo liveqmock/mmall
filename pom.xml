@@ -237,14 +237,6 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
-                    <!--<excludes>-->
-                        <!--<exclude>application.development.properties</exclude>-->
-                        <!--<exclude>application.properties</exclude>-->
-                        <!--<exclude>applicationContext.xml</exclude>-->
-                        <!--<exclude>applicationContext-qms.xml</exclude>-->
-                        <!--<exclude>logback.xml</exclude>-->
-                        <!--<exclude>**/config/*</exclude>-->
-                    <!--</excludes>-->
                     <includes>
                         <include>**/com/**</include>
                         <include>**/mybatis/**</include>

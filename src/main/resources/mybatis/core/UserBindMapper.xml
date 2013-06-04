@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.UserBindDao">
+
+    <!-- 根据第三方UID和来源获取用户ID -->
+    <select id="findUserIdByUidNFrom" parameterType="map" resultType="int">
+        SELECT
+            user_id
+        FROM qms_user_bind
+        WHERE bind_uid = #{bindUid} AND bind_from = #{bindFrom}
+    </select>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="map">
+        INSERT INTO qms_user_bind (user_id, bind_uid, bind_from, create_time) VALUES (#{userId}, #{bindUid}, #{bindFrom}, #{createTime})
+    </insert>
+
+
+</mapper>

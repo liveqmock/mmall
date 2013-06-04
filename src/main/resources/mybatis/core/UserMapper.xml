@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.UserDao">
+
+    <!-- 根据用户ID查找 -->
+    <select id="findByUserId" parameterType="int" resultType="User">
+        SELECT
+            user_id     AS userId,
+            username,
+            password,
+            sex,
+            nickname,
+            face_uri    AS faceUri,
+            last_time   AS lastTime,
+            create_time AS createTime
+        FROM qms_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 根据用户名查找 -->
+    <select id="findByUsername" parameterType="String" resultType="User">
+        SELECT
+            user_id     AS userId,
+            username,
+            password,
+            sex,
+            nickname,
+            face_uri    AS faceUri,
+            last_time   AS lastTime,
+            create_time AS createTime
+        FROM qms_user
+        WHERE username = #{username}
+    </select>
+
+    <!-- 更新最后活动时间 -->
+    <update id="updateLastTime" parameterType="int">
+        UPDATE qms_user
+        SET last_time = now()
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="User">
+        INSERT INTO qms_user (user_id, username, password, sex, nickname, face_uri, last_time, create_time) VALUES (#{userId}, #{username}, #{password}, #{sex}, #{nickname}, #{faceUri}, #{lastTime}, #{createTime})
+    </insert>
+
+    <!-- 计算列表对象数量 -->
+    <select id="countListByQuery" parameterType="map" resultType="int">
+        SELECT count(0) FROM qms_user
+        <where>
+            1 = 1
+            <if test="null != queryUsername and queryUsername != ''">
+                AND username LIKE concat('%', #{queryUsername}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据条件查找列表 -->
+    <select id="findListByQuery" parameterType="map" resultType="User">
+        SELECT
+        user_id AS userId,
+        username,
+        sex,
+        nickname,
+        face_uri AS faceUri,
+        last_time AS lastTime,
+        create_time AS createTime
+        FROM qms_user
+        <where>
+            1 = 1
+            <if test="null != queryUsername and queryUsername != ''">
+                AND username LIKE concat('%', #{queryUsername}, '%')
+            </if>
+        </where>
+        ORDER BY user_id DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="User">
+        UPDATE qms_user
+        SET username = #{username}, sex = #{sex}, nickname = #{nickname}, face_uri = #{faceUri}
+        WHERE user_id = #{userId}
+    </update>
+</mapper>

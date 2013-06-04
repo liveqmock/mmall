@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mm2018.mmall.oss.dao.OSSAuthenticationDao">
+
+    <!--删除过期认证-->
+    <delete id="deleteExpire" parameterType="date">
+        DELETE FROM oss_authentication
+        WHERE update_time &lt;= #{expiredDate}
+    </delete>
+
+    <!-- 根据ID删除认证信息 -->
+    <delete id="deleteById" parameterType="string">
+        DELETE FROM oss_authentication
+        WHERE authentication_id = #{authenticationId}
+    </delete>
+
+    <!--更新认证时间-->
+    <update id="updateAuthenticationTime" parameterType="OSSAuthentication">
+        UPDATE oss_authentication
+        SET update_time = #{updateTime}
+        WHERE authentication_id = #{authenticationId}
+    </update>
+
+    <!--通过认证ID查找认证信息-->
+    <select id="findById" parameterType="string" resultType="OSSAuthentication">
+        SELECT
+            authentication_id AS authenticationId,
+            user_id           AS userId,
+            username,
+            email,
+            login_time        AS loginTime,
+            login_ip          AS loginIP,
+            update_time       AS updateTime
+        FROM oss_authentication
+        WHERE authentication_id = #{authenticationId}
+    </select>
+
+    <!--保存的认证信息-->
+    <insert id="save" parameterType="OSSAuthentication">
+        INSERT INTO oss_authentication VALUES (#{authenticationId}, #{userId}, #{username}, #{email}, #{loginTime}, #{loginIP}, #{updateTime})
+    </insert>
+</mapper>

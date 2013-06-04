@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.StoryDao">
+
+    <!-- 计算列表对象数量 -->
+    <select id="countListByQuery" parameterType="map" resultType="int">
+        SELECT count(0) FROM qms_story
+        <where>
+            1 = 1
+            <if test="null != queryMusicId">
+                AND music_id = #{queryMusicId}
+            </if>
+            <if test="null != queryTitle and queryTitle != ''">
+                AND title LIKE concat('%', #{queryTitle}, '%')
+            </if>
+            <if test="queryRecommend == true">
+                AND is_recommend = #{queryRecommend}
+            </if>
+            <if test="null != queryStatus">
+                AND STATUS = #{queryStatus}
+            </if>
+            <if test="null == queryStatus">
+                AND STATUS >= 0
+            </if>
+            <if test="null != queryCategoryIds">
+                AND category_id IN (
+                <foreach collection="queryCategoryIds" item="categoryId" index="index">
+                    <if test="index &gt; 0">,</if>
+                    #{categoryId}
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据条件查找故事列表 -->
+    <select id="findListByQuery" parameterType="map" resultType="Story">
+        SELECT
+        story_id AS storyId,
+        category_id AS categoryId,
+        user_id AS userId,
+        nickname,
+        music_id AS musicId,
+        title,
+        summary,
+        image_uri AS imageUri,
+        is_recommend AS recommend,
+        status,
+        views,
+        comments,
+        ups,
+        release_time AS releaseTime,
+        create_time AS createTime
+        FROM qms_story
+        <where>
+            1 = 1
+            <if test="null != queryMusicId">
+                AND music_id = #{queryMusicId}
+            </if>
+            <if test="null != queryTitle and queryTitle != ''">
+                AND title LIKE concat('%', #{queryTitle}, '%')
+            </if>
+            <if test="queryRecommend == true">
+                AND is_recommend = #{queryRecommend}
+            </if>
+            <if test="null != queryStatus">
+                AND STATUS = #{queryStatus}
+            </if>
+            <if test="null == queryStatus">
+                AND STATUS >= 0
+            </if>
+            <if test="null != queryCategoryIds">
+                AND category_id IN (
+                <foreach collection="queryCategoryIds" item="categoryId" index="index">
+                    <if test="index &gt; 0">,</if>
+                    #{categoryId}
+                </foreach>
+                )
+            </if>
+        </where>
+        <if test="null == queryOrderBy or queryOrderBy == 0">
+            ORDER BY story_id DESC,is_recommend DESC
+        </if>
+        <if test="null != queryOrderBy and queryOrderBy == 1">
+            ORDER BY comments DESC
+        </if>
+        <if test="null != queryOrderBy and queryOrderBy == 2">
+            ORDER BY views DESC
+        </if>
+        <if test="null != queryOrderBy and queryOrderBy == 3">
+            ORDER BY ups DESC
+        </if>
+        <if test="null != queryOrderBy and queryOrderBy == 4">
+            ORDER BY release_time DESC
+        </if>
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 根据故事ID查找故事 -->
+    <select id="findByStoryId" parameterType="int" resultType="Story">
+        SELECT
+            story_id     AS storyId,
+            category_id  AS categoryId,
+            user_id      AS userId,
+            nickname,
+            music_id     AS musicId,
+            title,
+            summary,
+            image_uri    AS imageUri,
+            is_recommend AS recommend,
+            status,
+            views,
+            comments,
+            ups,
+            release_time AS releaseTime,
+            create_time  AS createTime
+        FROM qms_story
+        WHERE story_id = #{storyId}
+    </select>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="Story">
+        INSERT INTO qms_story (story_id, category_id, user_id, nickname, music_id, title, summary, image_uri, is_recommend, status, views, comments, ups, release_time, create_time) VALUES (#{storyId}, #{categoryId}, #{userId}, #{nickname}, #{musicId}, #{title}, #{summary}, #{imageUri}, #{recommend}, #{status}, #{views}, #{comments}, #{ups}, #{releaseTime}, #{createTime})
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="Story">
+        UPDATE qms_story
+        SET category_id = #{categoryId}, user_id = #{userId}, nickname = #{nickname}, music_id = #{musicId}, title = #{title}, summary = #{summary}, image_uri = #{imageUri}, is_recommend = #{recommend}, status = #{status}, release_time = now()
+        WHERE story_id = #{storyId}
+    </update>
+
+    <!-- 更新状态 -->
+    <update id="updateStatus" parameterType="map">
+        UPDATE qms_story
+        SET status = #{status}
+        <if test="status == 2">
+            ,release_time = now()
+        </if>
+        WHERE story_id = #{storyId}
+    </update>
+
+    <!-- 更新推荐状态 -->
+    <update id="updateRecommend" parameterType="map">
+        UPDATE qms_story
+        SET is_recommend = #{recommend}, release_time = now()
+        WHERE story_id = #{storyId}
+    </update>
+
+    <!-- 根据分类ID和限制数量获取推荐的故事, 根据时间倒序 -->
+    <select id="findRecommendListByCategoryIdNLimit" parameterType="map" resultType="Story">
+        SELECT
+            story_id  AS storyId,
+            title,
+            summary,
+            image_uri AS imageUri
+        FROM qms_story
+        WHERE category_id = #{categoryId} AND is_recommend = #{recommend} AND status = #{status}
+        ORDER BY release_time DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 根据故事ID列表获取故事列表 -->
+    <select id="findListByStoryIdList" parameterType="map" resultType="Story">
+        SELECT
+        story_id AS storyId,
+        user_id AS userId,
+        nickname,
+        music_id AS musicId,
+        title,
+        summary,
+        image_uri AS imageUri,
+        is_recommend AS recommend,
+        status,
+        views,
+        comments,
+        ups,
+        release_time AS releaseTime,
+        create_time AS createTime
+        FROM qms_story
+        <where>
+            1 = 1
+            <if test="null != status">
+                AND status = #{status}
+            </if>
+            AND story_id IN (
+            <foreach collection="storyIdList" item="storyId" index="index">
+                <if test="index &gt; 0">,</if>
+                #{storyId}
+            </foreach>
+            )
+        </where>
+        ORDER BY release_time DESC
+        <if test="null != offset and null != limit">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <!-- 根据音乐ID列表获取故事列表 -->
+    <select id="findListByMusicId" parameterType="map" resultType="Story">
+        SELECT
+        story_id AS storyId,
+        user_id as userId,
+        music_id as musicId,
+        title,
+        image_uri AS imageUri,
+        is_recommend AS recommend,
+        status,
+        create_time as createTime
+        FROM qms_story
+        WHERE music_id = #{musicId}
+        <if test="null != recommend">
+            and is_recommend = #{recommend}
+        </if>
+        <if test="null != status">
+            and status = #{status}
+        </if>
+    </select>
+
+    <!-- 根据音乐ID计算故事数量 -->
+    <select id="countByMusicId" parameterType="int" resultType="int">
+        SELECT
+            count(0)
+        FROM qms_story
+        WHERE music_id = #{musicId}
+    </select>
+
+    <!-- 更新 -->
+    <update id="incrUps" parameterType="map">
+        UPDATE qms_story
+        SET ups = ups + #{incr}
+        WHERE story_id = #{storyId}
+    </update>
+
+    <!-- 更新 -->
+    <update id="incrViews" parameterType="map">
+        UPDATE qms_story
+        SET views = views + #{incr}
+        WHERE story_id = #{storyId}
+    </update>
+
+    <!-- 更新 -->
+    <update id="updateComments" parameterType="map">
+        UPDATE qms_story
+        SET comments = #{comments}
+        WHERE story_id = #{storyId}
+    </update>
+
+    <!-- 计算推荐列表数量 -->
+    <select id="countRecommendListByCategoryId" parameterType="map" resultType="int">
+        SELECT
+        count(0)
+        FROM qms_story
+        WHERE is_recommend = #{recommend} AND status = #{status}
+        <if test="null != categoryId and categoryId > 0">
+            AND category_id = #{categoryId}
+        </if>
+    </select>
+
+    <!-- 根据分类ID和限制数量获取推荐的故事, 根据时间倒序 -->
+    <select id="findRecommendListByCategoryId" parameterType="map" resultType="Story">
+        SELECT
+        story_id AS storyId,
+        user_id AS userId,
+        nickname,
+        music_id AS musicId,
+        title,
+        summary,
+        image_uri AS imageUri,
+        create_time AS createTime
+        FROM qms_story
+        WHERE is_recommend = #{recommend} AND status = #{status}
+        <if test="null != categoryId and categoryId > 0">
+            AND category_id = #{categoryId}
+        </if>
+        ORDER BY release_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 根据分类ID获取最新故事 -->
+    <select id="findLatestByCategoryId" parameterType="map" resultType="Story">
+        SELECT
+            story_id    AS storyId,
+            title,
+            image_uri   AS imageUri,
+            create_time AS createTime
+        FROM qms_story
+        WHERE category_id = #{categoryId} AND is_recommend = #{recommend} AND status = #{status}
+        ORDER BY release_time DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 根据分类ID和发布时间计算推荐故事数量 -->
+    <select id="countByReleaseTime" parameterType="map" resultType="int">
+        SELECT
+            count(0)
+        FROM qms_story
+        WHERE category_id = #{categoryId} AND is_recommend = #{recommend} AND status = #{status} AND
+              release_time &gt; #{releaseTime}
+    </select>
+
+    <!-- 查找随机故事 -->
+    <select id="findRandom" parameterType="map" resultType="Story">
+        SELECT
+            story_id  AS storyId,
+            title,
+            image_uri AS imageUri
+        FROM qms_story
+        WHERE is_recommend = #{recommend} AND status = #{status}
+        ORDER BY rand()
+        LIMIT 1
+    </select>
+
+    <!-- 根据标题获取故事 -->
+    <select id="findByTitle" parameterType="String" resultType="Story">
+        SELECT
+            story_id    AS storyId,
+            title,
+            image_uri   AS imageUri,
+            create_time AS createTime
+        FROM qms_story
+        WHERE title = #{title}
+        LIMIT 1
+    </select>
+
+    <!-- 更新 -->
+    <update id="updateUps" parameterType="map">
+        UPDATE qms_story
+        SET ups = #{ups}
+        WHERE story_id = #{storyId}
+    </update>
+</mapper>

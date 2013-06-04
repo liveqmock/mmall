@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxai.qms.core.dao.ArtistDao">
+
+    <!-- 根据艺人ID删除艺人 -->
+    <delete id="deleteByArtistId" parameterType="int">
+        DELETE FROM qms_artist
+        WHERE artist_id = #{artistId}
+    </delete>
+
+    <!-- 根据艺人ID查找艺人 -->
+    <select id="findByArtistId" parameterType="int" resultType="Artist">
+        SELECT
+            artist_id   AS artistId,
+            artist_name AS artistName,
+            band_id     AS bandId,
+            image_uri   AS imageUri,
+            region,
+            type,
+            description,
+            create_time AS createTime
+        FROM qms_artist
+        WHERE artist_id = #{artistId}
+    </select>
+
+    <!-- 计算列表对象数量 -->
+    <select id="countListByQuery" parameterType="map" resultType="int">
+        SELECT count(0) FROM qms_artist
+        <where>
+            1 = 1
+            <if test="null != queryArtistName and queryArtistName != ''">
+                AND artist_name LIKE concat('%', #{queryArtistName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据条件查找艺人列表 -->
+    <select id="findListByQuery" parameterType="map" resultType="Artist">
+        SELECT
+        artist_id AS artistId,
+        artist_name AS artistName,
+        band_id AS bandId,
+        image_uri AS imageUri,
+        region,
+        type,
+        description,
+        create_time AS createTime
+        FROM qms_artist
+        <where>
+            1 = 1
+            <if test="null != queryArtistName and queryArtistName != ''">
+                AND artist_name LIKE concat('%', #{queryArtistName}, '%')
+            </if>
+        </where>
+        ORDER BY artist_id DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 根据艺人名查找乐队列表 -->
+    <select id="findBandListByArtistName" parameterType="map" resultType="Artist">
+        SELECT
+        artist_id AS artistId,
+        artist_name AS artistName
+        FROM qms_artist
+        <where>
+            type = #{type}
+            <if test="null != queryArtistName and queryArtistName != ''">
+                AND artist_name LIKE concat('%', #{queryArtistName}, '%')
+            </if>
+        </where>
+        ORDER BY artist_id DESC
+    </select>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="Artist">
+        INSERT INTO qms_artist VALUES (#{artistId}, #{artistName}, #{bandId}, #{imageUri}, #{region}, #{type}, #{description}, #{createTime})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="Artist">
+        UPDATE qms_artist
+        SET artist_name = #{artistName}, band_id = #{bandId}, image_uri = #{imageUri}, region = #{region}, type = #{type}, description = #{description}
+        WHERE artist_id = #{artistId}
+    </update>
+
+    <!-- 根据艺人名查找艺人列表 -->
+    <select id="findListByArtistName" parameterType="String" resultType="Artist">
+        SELECT
+            artist_id   AS artistId,
+            artist_name AS artistName
+        FROM qms_artist
+        WHERE artist_name LIKE concat('%', #{artistName}, '%')
+        ORDER BY artist_id DESC
+        LIMIT 10
+    </select>
+</mapper>
