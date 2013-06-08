@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mm2018.mmall.core.dao.OrdersDao">
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO mmall_orders (item_id, item_name, price, contact, phone, address, remark, create_time) VALUES (#{itemId}, #{itemName}, #{price}, #{contact}, #{phone}, #{address}, #{remark}, now())
+    </insert>
+
+</mapper>
