@@ -30,7 +30,7 @@ IPHONE4/4S 真皮手机套<br/>人气值<strong>183</strong>;共<strong>8</stron
 <img style="WIDTH: 220px; height: 150px" alt=""
      src="${base}/mmall/static/mobile/images/2/2-5.jpg"/><br/><br/>
 我要购买:<br/>
-在线订购:<a href="${base}/mmall/c/order/${id!}">黑色</a><br/>
+在线订购:<a href="${base}/mmall/c/order/${id!}">真皮</a><br/>
 <a href="${base}/mmall/c/order/${id!}">立即在线订购>></a><br/>
 商品货到付款,7天包退换!!<br/>
 电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
