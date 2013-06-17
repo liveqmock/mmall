@@ -16,8 +16,6 @@
     产品名称：血压云监护<br/>
     产品型号: MY11<br/>
     产品包装：监护手机、血压仪、数据线<br/>
-    （本款型号有支持iPhone 4/4S和支持iPhone 5两种，拍下请注明您的手机型号）<br/>
-    简介:让IPHONE手机充满古典的味道，让你彰显独特的风格品味！<br/>
     <img style="WIDTH: 220px; height: 150px" alt="" src="${base}/mmall/static/mobile/images/6/6-3.jpg"/><br/><br/>
     我要购买:<br/>
     在线订购:<a href="${base}/mmall/c/order/${id!}">手机健康仪</a><br/>
