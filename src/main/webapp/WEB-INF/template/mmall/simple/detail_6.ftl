@@ -33,5 +33,6 @@
 <#--<a href="${base}/mmall/s/detail/5">※IPHONE车载充电套组仅118</a><br/>-->
 &gt;&gt;切换到<a href="${base}/mmall/c/detail/${id!}">彩色版</a><br/>
 订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
+客服QQ：852323338<br/>
 客服服务 09:00-21:00<br/>
 </@s.tl>

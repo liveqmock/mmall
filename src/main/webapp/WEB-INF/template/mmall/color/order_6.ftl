@@ -35,7 +35,9 @@
         <div class="nav1_left">
             <a href="#top"><img src="${base}/mmall/static/mobile/images/totop.gif" alt="top"/></a><br/>
         </div>
-        订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>客服服务 09:00-21:00<br/>
+        订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
+        客服QQ：852323338<br/>
+        客服服务 09:00-21:00<br/>
         版本切换:彩色版|<a href="${base}/mmall/s/order/${id!}">简单版</a>
     </div>
 </@c.tl>

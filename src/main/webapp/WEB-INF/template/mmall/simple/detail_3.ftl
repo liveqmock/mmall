@@ -50,5 +50,6 @@ IPHONE5 真皮手机套<br/>人气值<strong>128</strong>;共<strong>6</strong>�
 
 &gt;&gt;切换到<a href="${base}/mmall/c/detail/${id!}">彩色版</a><br/>
 订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
+客服QQ：852323338<br/>
 客服服务 09:00-21:00<br/>
 </@s.tl>

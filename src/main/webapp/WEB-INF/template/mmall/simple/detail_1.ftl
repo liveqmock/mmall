@@ -34,5 +34,6 @@ T02微型投影机的LED光源灯使用寿命是10000小时以上,每天6小时�
 <a href="${base}/mmall/s/detail/6">※手机健康仪仅999</a><br/>
 &gt;&gt;切换到<a href="${base}/mmall/c/detail/${id!}">彩色版</a><br/>
 订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
+客服QQ：852323338<br/>
 客服服务 09:00-21:00<br/>
 </@s.tl>
