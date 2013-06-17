@@ -24,11 +24,12 @@
         function chgStatus() {
             var queryStatus = $("input[name=queryStatus]:checked").val();
             location.href = "v_list.jhtml?queryStatus=" + queryStatus
-                    + "&queryContact=${queryContact!}&queryPhone=${queryPhone!}&pageNo=${pageNo!}";
+                    + "&queryContact=${queryContact!}&queryPhone=${queryPhone!}&pageNo=${pageNo!}&queryStartDate=${queryStartDate!}&queryEndDate=${queryEndDate!}";
         }
         function optSaveContent() {
             var f = getTableForm();
-            f.action = "o_modify.jhtml";
+            f.action = "o_modify_express.jhtml?queryStatus=${queryStatus!}&queryContact=${queryContact!}" +
+                    "&queryPhone=${queryPhone!}&pageNo=${pageNo!}&queryStartDate=${queryStartDate!}&queryEndDate=${queryEndDate!}";
             f.submit();
         }
     </script>
@@ -42,11 +43,13 @@
     <div class="clear"></div>
 </div>
 <div class="body-box">
-<#assign params>&pageNo=${pageNo!}&queryContact=${queryContact!?url}&queryPhone=${queryPhone!}&queryStatus=${queryStatus!}</#assign>
+<#assign params>&pageNo=${pageNo!}&queryContact=${queryContact!?url}&queryPhone=${queryPhone!}&queryStatus=${queryStatus!}&queryStartDate=${queryStartDate!}&queryEndDate=${queryEndDate!}</#assign>
     <form action="v_list.jhtml" method="post" style="padding-top:5px;">
         <div>
             联系人 : <input type="text" name="queryContact" value="${queryContact!}" style="width:100px"/>
             &nbsp;电话 : <input type="text" name="queryPhone" value="${queryPhone!}" style="width:100px"/>
+            &nbsp;开始时间:<input type="text" name="queryStartDate" value="<#if queryStartDate?? && queryStartDate?length gt 0>${queryStartDate!}</#if>" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd',autoPickDate:true})"/>
+            &nbsp;结束时间:<input type="text" name="queryEndDate" value="<#if queryEndDate?? && queryEndDate?length gt 0>${queryEndDate!}</#if>" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd',autoPickDate:true})"/>
             <input class="query" type="submit" value="查询"/>
         </div>
         <div style="padding-top:5px">
@@ -75,13 +78,14 @@
       <@t.column title="<input type='checkbox' onclick='Kxa.checkbox(\"ids\",this.checked)'/>" width="20">
           <input type="checkbox" name="ids" value="${(orders.orderId)!}"/><#t/>
       </@t.column><#t/>
-      <@t.column title="ID">${(orders.orderId)!}</@t.column><#t/>
+      <@t.column title="ID">${(orders.orderId)!}<input type="hidden" name="id" value="${(orders.orderId)!}"/></@t.column><#t/>
       <@t.column title="商品名">${orders.itemName}</@t.column><#t/>
       <@t.column title="价格">${(orders.price)!}</@t.column><#t/>
       <@t.column title="联系人" align="center">${(orders.contact)!}</@t.column><#t/>
       <@t.column title="电话" align="center">${(orders.phone)!}</@t.column><#t/>
       <@t.column title="地址" align="center">${(orders.address)!0}</@t.column><#t/>
       <@t.column title="备注">${(orders.remark)!}</@t.column><#t/>
+      <@t.column title="快递单号" align="center"><input type="text" name="express" value="${(orders.express)!}"/></@t.column><#t/>
       <@t.column title="状态" align="center">
         <#if orders.status == 0>
           下单
@@ -129,6 +133,7 @@
         <#--<@oss_perm url="/story/o_cancel_recommend.jhtml">-->
             <#--&nbsp; <input type="button" value="取消推荐" onclick="optCancelRecommend();" class="del-index-page"/>-->
         <#--</@oss_perm>-->
+          <input class="save-content" type="button" value="保存内容" onclick="optSaveContent();"/>
         </div>
     </form>
 </div>

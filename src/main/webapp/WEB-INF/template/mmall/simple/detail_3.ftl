@@ -10,7 +10,7 @@ IPHONE5 真皮手机套<br/>人气值<strong>128</strong>;共<strong>6</strong>�
 在线订购:<a href="${base}/mmall/s/order/${id!}">IPHONE5</a><br/>
 <a href="${base}/mmall/s/order/${id!}">立即在线订购>></a><br/>
 商品货到付款,7天包退换!!<br/>
-电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
 
 【产品简介】<br/>
 产品名称：真皮皮套<br/>
@@ -39,16 +39,16 @@ IPHONE5 真皮手机套<br/>人气值<strong>128</strong>;共<strong>6</strong>�
 在线订购:<a href="${base}/mmall/s/order/${id!}">IPHONE5</a><br/>
 <a href="${base}/mmall/s/order/${id!}">立即在线订购>></a><br/>
 商品货到付款,7天包退换!!<br/>
-电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
 <hr/>
 ==同类产品推荐==<br/>
 <a href="${base}/mmall/s/detail/1">※IPhone4/4S专用高清微型投影仪仅599</a><br/>
 <a href="${base}/mmall/s/detail/2">※IPHONE4/4S 真皮手机套仅268</a><br/>
 <a href="${base}/mmall/s/detail/4">※IPAD MINI皮套仅128</a><br/>
-<a href="${base}/mmall/s/detail/5">※IPHONE车载充电套组仅118</a><br/>
+<#--<a href="${base}/mmall/s/detail/5">※IPHONE车载充电套组仅118</a><br/>-->
 <a href="${base}/mmall/s/detail/6">※手机健康仪仅999</a><br/>
 
 &gt;&gt;切换到<a href="${base}/mmall/c/detail/${id!}">彩色版</a><br/>
-订购|咨询<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
 客服服务 09:00-21:00<br/>
 </@s.tl>

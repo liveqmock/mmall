@@ -10,7 +10,7 @@
     在线订购:<a href="${base}/mmall/c/order/${id!}">黑色</a><br/>
     <a href="${base}/mmall/c/order/${id!}">立即在线订购>></a><br/>
     商品货到付款,7天包退换!!<br/>
-    电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+    电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
     T02微型投影机的LED光源灯使用寿命是10000小时以上,每天6小时也可以使用好几年,而且节能环保、无辐射.<br/>
     <img style="WIDTH: 220px; height: 150px" alt="" src="${base}/mmall/static/mobile/images/1/ClaB1305170408044167380.jpg"/><br/>
     内置高保真立体声喇叭,不需要外接音响也可以看电影,满足你随时随地的视听需求.<br/>
@@ -21,7 +21,7 @@
     在线订购:<a href="${base}/mmall/c/order/${id!}">黑色</a><br/>
     <a href="${base}/mmall/c/order/${id!}">立即在线订购>></a><br/>
     商品货到付款,7天包退换!!<br/>
-    电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+    电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
     <hr/>
     <div class="box">
         <div class="cof">==同类产品推荐==</div>
@@ -29,13 +29,13 @@
     <a style="color:#666666;" href="${base}/mmall/c/detail/2">※IPHONE4/4S 真皮手机套仅268</a><br/>
     <a style="color:#666666;" href="${base}/mmall/c/detail/3">※IPHONE5 真皮手机套仅328</a><br/>
     <a style="color:#666666;" href="${base}/mmall/c/detail/4">※IPAD MINI皮套仅128</a><br/>
-    <a style="color:#666666;" href="${base}/mmall/c/detail/5">※IPHONE车载充电套组仅118</a><br/>
+    <#--<a style="color:#666666;" href="${base}/mmall/c/detail/5">※IPHONE车载充电套组仅118</a><br/>-->
     <a style="color:#666666;" href="${base}/mmall/c/detail/6">※手机健康仪仅999</a><br/>
     <div class="footer">
         <div class="nav1_left">
             <a href="#top"><img src="${base}/mmall/static/mobile/images/totop.gif" alt="top"/></a><br/>
         </div>
-        订购|咨询<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>客服服务 09:00-21:00<br/>
+        订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>客服服务 09:00-21:00<br/>
         版本切换:彩色版|<a href="${base}/mmall/s/detail/${id!}">简单版</a>
     </div>
 </@c.tl>

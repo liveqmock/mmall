@@ -10,7 +10,7 @@
 在线订购:<a href="${base}/mmall/s/order/${id!}">黑色</a><br/>
 <a href="${base}/mmall/s/order/${id!}">立即在线订购>></a><br/>
 商品货到付款,7天包退换!!<br/>
-电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
 T02微型投影机的LED光源灯使用寿命是10000小时以上,每天6小时也可以使用好几年,而且节能环保、无辐射.<br/>
 <img alt="" src="${base}/mmall/static/mobile/images/1/ClaB1305170408044167380.jpg"/>
 <br/>
@@ -24,15 +24,15 @@ T02微型投影机的LED光源灯使用寿命是10000小时以上,每天6小时�
 在线订购:<a href="${base}/mmall/s/order/${id!}">黑色</a><br/>
 <a href="${base}/mmall/s/order/${id!}">立即在线订购>></a><br/>
 商品货到付款,7天包退换!!<br/>
-电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
 <hr/>
 ==同类产品推荐==<br/>
 <a href="${base}/mmall/s/detail/2">※IPHONE4/4S 真皮手机套仅268</a><br/>
 <a href="${base}/mmall/s/detail/3">※IPHONE5 真皮手机套仅328</a><br/>
 <a href="${base}/mmall/s/detail/4">※IPAD MINI皮套仅128</a><br/>
-<a href="${base}/mmall/s/detail/5">※IPHONE车载充电套组仅118</a><br/>
+<#--<a href="${base}/mmall/s/detail/5">※IPHONE车载充电套组仅118</a><br/>-->
 <a href="${base}/mmall/s/detail/6">※手机健康仪仅999</a><br/>
 &gt;&gt;切换到<a href="${base}/mmall/c/detail/${id!}">彩色版</a><br/>
-订购|咨询<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
 客服服务 09:00-21:00<br/>
 </@s.tl>

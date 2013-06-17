@@ -21,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 /**
  * orders管理.
@@ -39,23 +40,28 @@ public class BOrdersController {
     private OSSLogSvc ossLogSvc;
 
     @RequestMapping("/orders/v_list.jhtml")
-    public String list(String queryContact, String queryPhone, Integer queryStatus, Integer pageNo,
-            HttpServletRequest request, ModelMap model) {
+    public String list(String queryContact, String queryPhone, Integer queryStatus, String queryStartDate,
+            String queryEndDate, Integer pageNo, HttpServletRequest request, ModelMap model) {
         log.infof("list.jhtml queryStatus = %s", String.valueOf(queryStatus));
+        log.infof("list.jhtml queryStartDate = %s", queryStartDate);
+        log.infof("list.jhtml queryEndDate = %s", queryEndDate);
         PageList<Orders> pageList = ordersSvc
-                .getPageListByQuery(queryContact, queryPhone, queryStatus, RequestUtil.cpn(pageNo),
-                        CookieUtil.getPageSize(request));
+                .getPageListByQuery(queryContact, queryPhone, queryStatus, queryStartDate, queryEndDate,
+                        RequestUtil.cpn(pageNo), CookieUtil.getPageSize(request));
         model.addAttribute("pagination", pageList);
         model.addAttribute("queryContact", queryContact);
         model.addAttribute("queryPhone", queryPhone);
         model.addAttribute("queryStatus", queryStatus);
+        model.addAttribute("queryStartDate", queryStartDate);
+        model.addAttribute("queryEndDate", queryEndDate);
         model.addAttribute("pageNo", pageNo);
         return "orders/list";
     }
 
     @RequestMapping("/orders/o_modify_status.jhtml")
     public String modifyStatus(Integer orderId, Integer status, String queryContact, String queryPhone,
-            Integer queryStatus, Integer pageNo, HttpServletRequest request, ModelMap model) {
+            Integer queryStatus, String queryStartDate, String queryEndDate, Integer pageNo, HttpServletRequest request,
+            ModelMap model) {
         WebErrors errors = validateEdit(orderId);
         if (errors.hasErrors()) {
             return errors.showErrorPage(model);
@@ -69,7 +75,18 @@ public class BOrdersController {
         model.addAttribute(Constants.OSS_MESSAGE, "修改成功!");
         log.infof("modify Status orderId = %d", orderId);
         ossLogSvc.operating(request, "修改订单状态", "orderId=" + orderId);
-        return list(queryContact, queryPhone, queryStatus, pageNo, request, model);
+        return list(queryContact, queryPhone, queryStatus, queryStartDate, queryEndDate, pageNo, request, model);
+    }
+
+    @RequestMapping("/orders/o_modify_express.jhtml")
+    public String modifyExpress(Integer[] id, String[] express, String queryContact, String queryPhone,
+            Integer queryStatus, String queryStartDate, String queryEndDate, Integer pageNo, HttpServletRequest request,
+            ModelMap model) {
+        ordersSvc.modifyExpress(id, express);
+        model.addAttribute(Constants.OSS_MESSAGE, "修改成功!");
+        log.infof("modifyExpress orderId = " + Arrays.toString(id));
+        ossLogSvc.operating(request, "修改快递单号", "id=" + Arrays.toString(id));
+        return list(queryContact, queryPhone, queryStatus, queryStartDate, queryEndDate, pageNo, request, model);
     }
 
     /**

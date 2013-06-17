@@ -20,13 +20,13 @@
 <a style="color:#666666;" href="${base}/mmall/c//detail/2">※IPHONE4/4S 真皮手机套仅268</a><br/>
 <a style="color:#666666;" href="${base}/mmall/c//detail/3">※IPHONE5 真皮手机套仅328</a><br/>
 <a style="color:#666666;" href="${base}/mmall/c//detail/4">※IPAD MINI皮套仅128</a><br/>
-<a style="color:#666666;" href="${base}/mmall/c//detail/5">※IPHONE车载充电套组仅118</a><br/>
+<#--<a style="color:#666666;" href="${base}/mmall/c//detail/5">※IPHONE车载充电套组仅118</a><br/>-->
 <a style="color:#666666;" href="${base}/mmall/c//detail/6">※手机健康仪仅999</a><br/>
 <div class="footer">
 <div class="nav1_left">
   <a href="#top"><img src="${base}/mmall/static/mobile/images/totop.gif" alt="top"/></a><br />
 </div>
-订购|咨询<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>客服服务 09:00-21:00<br/>
+订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>客服服务 09:00-21:00<br/>
 版本切换:彩色版|<a href="${base}/mmall/s/info/${id!}" >简单版</a>
 </div>
 </@c.tl>

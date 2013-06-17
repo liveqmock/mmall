@@ -11,7 +11,7 @@
     在线订购:<a href="${base}/mmall/c/order/${id!}">车载充电套组</a><br/>
     <a href="${base}/mmall/c/order/${id!}">立即在线订购>></a><br/>
     商品货到付款,7天包退换!!<br/>
-    电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+    电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
 
     <div class="box">
         <div class="cof"> 【产品简介】<br/></div>
@@ -27,7 +27,7 @@
     在线订购:<a href="${base}/mmall/c/order/${id!}">车载充电套组</a><br/>
     <a href="${base}/mmall/c/order/${id!}">立即在线订购>></a><br/>
     商品货到付款,7天包退换!!<br/>
-    电话订购:<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>
+    电话订购:<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>
     <hr/>
     <div class="box">
         <div class="cof">==同类产品推荐==</div>
@@ -42,7 +42,7 @@
         <div class="nav1_left">
             <a href="#top"><img src="${base}/mmall/static/mobile/images/totop.gif" alt="top"/></a><br/>
         </div>
-        订购|咨询<a href="wtai://wp/mc;4000939991">400-093-9991</a><br/>客服服务 09:00-21:00<br/>
+        订购|咨询<a href="wtai://wp/mc;075583405480">0755-83405480</a><br/>客服服务 09:00-21:00<br/>
         版本切换:彩色版|<a href="${base}/mmall/s/detail/${id!}">简单版</a>
     </div>
 </@c.tl>

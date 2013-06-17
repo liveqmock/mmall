@@ -65,12 +65,14 @@ public class OrdersSvc {
      */
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
-    public PageList<Orders> getPageListByQuery(String queryContact, String queryPhone, Integer queryStatus, int pageNo,
-            int pageSize) {
+    public PageList<Orders> getPageListByQuery(String queryContact, String queryPhone, Integer queryStatus,
+            String queryStartDate, String queryEndDate, int pageNo, int pageSize) {
         Map<String, Object> params = Maps.newHashMap();
         params.put("queryContact", queryContact);
         params.put("queryPhone", queryPhone);
         params.put("queryStatus", queryStatus);
+        params.put("queryStartDate", queryStartDate);
+        params.put("queryEndDate", queryEndDate);
         int totalResult = ordersDao.countListByQuery(params);
         Paginator paginator = new Paginator(pageNo, pageSize, totalResult);
         PageList<Orders> pageList = new PageList<Orders>(paginator);
@@ -103,5 +105,21 @@ public class OrdersSvc {
         params.put("orderId", orderId);
         params.put("status", status);
         ordersDao.updateStatus(params);
+    }
+
+    /**
+     * 修改快递单号
+     *
+     * @param ids      订单ID
+     * @param expresses 快递单号
+     */
+    public void modifyExpress(Integer[] ids, String[] expresses) {
+        Map<String, Object> params;
+        for (int i = 0, n = ids.length; i < n; i++) {
+            params = Maps.newHashMap();
+            params.put("orderId", ids[i]);
+            params.put("express", expresses[i]);
+            ordersDao.updateExpress(params);
+        }
     }
 }

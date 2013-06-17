@@ -53,4 +53,11 @@ public interface OrdersDao {
      * @param params 订单ID + 状态
      */
     void updateStatus(Map<String, Object> params);
+
+    /**
+     * 更新快递单号
+     *
+     * @param params 订单ID + 快递单号
+     */
+    void updateExpress(Map<String, Object> params);
 }

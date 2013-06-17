@@ -22,6 +22,12 @@
             <if test="null != queryStatus">
                 AND status = #{queryStatus}
             </if>
+            <if test="null != queryStartDate and queryStartDate != ''">
+                AND create_time >= #{queryStartDate}
+            </if>
+            <if test="null != queryEndDate and queryEndDate != ''">
+                <![CDATA[AND create_time <= #{queryEndDate}]]>
+            </if>
         </where>
     </select>
 
@@ -36,6 +42,7 @@
         phone,
         address,
         remark,
+        express,
         status,
         create_time AS createTime
         FROM mmall_orders
@@ -49,6 +56,12 @@
             </if>
             <if test="null != queryStatus">
                 AND status = #{queryStatus}
+            </if>
+            <if test="null != queryStartDate and queryStartDate != ''">
+                AND create_time >= #{queryStartDate}
+            </if>
+            <if test="null != queryEndDate and queryEndDate != ''">
+                <![CDATA[AND create_time <= #{queryEndDate}]]>
             </if>
         </where>
         ORDER BY order_id DESC
@@ -66,6 +79,7 @@
         phone,
         address,
         remark,
+        express,
         status,
         create_time AS createTime
         FROM mmall_orders
@@ -76,6 +90,13 @@
     <update id="updateStatus" parameterType="map">
         UPDATE mmall_orders
         SET status = #{status}
+        WHERE order_id = #{orderId}
+    </update>
+
+    <!-- 更新状态 -->
+    <update id="updateExpress" parameterType="map">
+        UPDATE mmall_orders
+        SET express = #{express}
         WHERE order_id = #{orderId}
     </update>
 </mapper>

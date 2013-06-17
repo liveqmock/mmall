@@ -18,15 +18,27 @@ import java.util.Date;
 public class BaseOrders
         implements Serializable {
 
+    // 订单ID
     private Integer orderId;
+    // 商品ID
     private Integer itemId;
+    // 商品名
     private String itemName;
+    // 价格
     private Integer price;
+    // 联系人
     private String contact;
+    // 用户电话
     private String phone;
+    // 用户地址
     private String address;
+    // 用户备注
     private String remark;
+    // 快递单号
+    private String express;
+    // 状态 -1删除 0下单 1回访 2发货 3签收 4完成
     private Integer status;
+    // 创建时间
     private Date createTime;
 
     public Integer getOrderId() {
@@ -93,6 +105,14 @@ public class BaseOrders
         this.remark = remark;
     }
 
+    public String getExpress() {
+        return express;
+    }
+
+    public void setExpress(String express) {
+        this.express = express;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -120,6 +140,7 @@ public class BaseOrders
         sb.append(", phone='").append(phone).append('\'');
         sb.append(", address='").append(address).append('\'');
         sb.append(", remark='").append(remark).append('\'');
+        sb.append(", express='").append(express).append('\'');
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append('}');
