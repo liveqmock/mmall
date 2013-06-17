@@ -6,6 +6,7 @@
 package net.mm2018.mmall.core.domain.base;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 订单.
@@ -25,6 +26,8 @@ public class BaseOrders
     private String phone;
     private String address;
     private String remark;
+    private Integer status;
+    private Date createTime;
 
     public Integer getOrderId() {
         return orderId;
@@ -90,6 +93,22 @@ public class BaseOrders
         this.remark = remark;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("BaseOrders{");
@@ -101,6 +120,8 @@ public class BaseOrders
         sb.append(", phone='").append(phone).append('\'');
         sb.append(", address='").append(address).append('\'');
         sb.append(", remark='").append(remark).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", createTime=").append(createTime);
         sb.append('}');
         return sb.toString();
     }

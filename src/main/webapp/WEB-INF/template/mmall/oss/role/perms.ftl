@@ -19,15 +19,15 @@
         </div>
     </div>
 
-    <#--<div class="perm-layout-1">-->
-        <#--<label><input value="/frame/music" type="checkbox" name="perms"/>曲库管理</label>-->
+    <div class="perm-layout-1">
+        <label><input value="/frame/orders" type="checkbox" name="perms"/>订单管理</label>
 
-        <#--<div>-->
+        <div>
             <#--<div class="perm-layout-2"><label><input value="/artist/,${imgPerms}" type="checkbox" name="perms"/>艺人管理</label></div>-->
             <#--<div class="perm-layout-2"><label><input value="/album/,${imgPerms}" type="checkbox" name="perms"/>专辑管理</label></div>-->
-            <#--<div class="perm-layout-2"><label><input value="/music/,/common/o_upload_file.jhtml,/common/o_upload_media.jhtml,${imgPerms}" type="checkbox" name="perms"/>音乐管理</label></div>-->
-        <#--</div>-->
-    <#--</div>-->
+            <div class="perm-layout-2"><label><input value="/music/" type="checkbox" name="perms"/>订单管理</label></div>
+        </div>
+    </div>
 
     <#--<div class="perm-layout-1">-->
     <#--<label><input value="/frame/category,/category/v_left.jhtml,/category/v_tree.jhtml,/category/v_list.jhtml" type="checkbox" name="perms"/>分类管理</label>-->

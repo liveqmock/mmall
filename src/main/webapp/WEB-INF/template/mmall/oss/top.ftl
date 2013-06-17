@@ -172,6 +172,12 @@
                         <a href="frame/system_main.jhtml" target="mainFrame">系统</a>
                       </li>
                     </@oss_perm>
+                    <@oss_perm url="/frame/orders_main.jhtml">
+                       <li class="sep"></li>
+                       <li class="normal" id="tb_12">
+                         <a href="frame/orders_main.jhtml" target="mainFrame">订单</a>
+                       </li>
+                    </@oss_perm>
                     </ul>
                   </td>
                 </tr>

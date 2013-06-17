@@ -89,9 +89,9 @@ public class OSSLoginController {
             model.addAttribute("message", message);
         }
         //检测IP来源,设置变量,是否显示“获取外网登录验证码”
-        if (!OSSUtil.isWhiteIp4Login(request)) {
-            model.put("isOutsideNetwork", "Y");
-        }
+//        if (!OSSUtil.isWhiteIp4Login(request)) {
+//            model.put("isOutsideNetwork", "Y");
+//        }
         return "login";
     }
 
@@ -141,9 +141,9 @@ public class OSSLoginController {
             model.addAttribute("message", message);
         }
         //检测IP来源,设置变量,是否显示“获取外网登录验证码”
-        if (!OSSUtil.isWhiteIp4Login(request)) {
-            model.put("isOutsideNetwork", "Y");
-        }
+//        if (!OSSUtil.isWhiteIp4Login(request)) {
+//            model.put("isOutsideNetwork", "Y");
+//        }
         return "login";
     }
 
@@ -224,18 +224,18 @@ public class OSSLoginController {
                 return errors;
             }
         }
-        if (!OSSUtil.isWhiteIp4Login(request)) {
-            String verifyCodeFromParam = RequestUtil.getParameterForString(request, "outsideNetworkVerifyCode", null);
-            String email = RequestUtil.getParameterForString(request, "insideNetworkEmail", null);
-            if (StringUtils.isBlank(verifyCodeFromParam) || StringUtils.isBlank(email)) {
-                errors.addError("外网登录校验码或内网邮箱无效");
-                return errors;
-            }
-            String emailVerifyCode = (String) RequestUtil.getSessionAttribute(request, email);
-            if (StringUtils.isBlank(emailVerifyCode) || !StringUtils.equals(emailVerifyCode, verifyCodeFromParam)) {
-                errors.addError("外网登录校验码无效");
-            }
-        }
+//        if (!OSSUtil.isWhiteIp4Login(request)) {
+//            String verifyCodeFromParam = RequestUtil.getParameterForString(request, "outsideNetworkVerifyCode", null);
+//            String email = RequestUtil.getParameterForString(request, "insideNetworkEmail", null);
+//            if (StringUtils.isBlank(verifyCodeFromParam) || StringUtils.isBlank(email)) {
+//                errors.addError("外网登录校验码或内网邮箱无效");
+//                return errors;
+//            }
+//            String emailVerifyCode = (String) RequestUtil.getSessionAttribute(request, email);
+//            if (StringUtils.isBlank(emailVerifyCode) || !StringUtils.equals(emailVerifyCode, verifyCodeFromParam)) {
+//                errors.addError("外网登录校验码无效");
+//            }
+//        }
         return errors;
     }
 

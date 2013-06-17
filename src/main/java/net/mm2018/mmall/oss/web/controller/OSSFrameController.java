@@ -33,70 +33,20 @@ public class OSSFrameController {
         return "frame/system_right";
     }
 
-    // 曲库管理
-    @RequestMapping("/frame/music_main.jhtml")
-    public String musicMain() {
-        return "frame/music_main";
+    // 订单管理
+    @RequestMapping("/frame/orders_main.jhtml")
+    public String ordersMain() {
+        return "frame/orders_main";
     }
 
-    @RequestMapping("/frame/music_left.jhtml")
-    public String musicLeft() {
-        return "frame/music_left";
+    @RequestMapping("/frame/orders_left.jhtml")
+    public String ordersLeft() {
+        return "frame/orders_left";
     }
 
-    @RequestMapping("/frame/music_right.jhtml")
-    public String musicRight() {
-        return "frame/music_right";
-    }
-
-    // 分类管理
-    @RequestMapping("/frame/category_main.jhtml")
-    public String categoryMain() {
-        return "frame/category_main";
-    }
-
-    // 故事管理
-    @RequestMapping("/frame/story_main.jhtml")
-    public String storyMain() {
-        return "frame/story_main";
-    }
-
-    // 用户管理
-    @RequestMapping("/frame/user_main.jhtml")
-    public String userMain() {
-        return "frame/user_main";
-    }
-
-    @RequestMapping("/frame/user_left.jhtml")
-    public String userLeft() {
-        return "frame/user_left";
-    }
-
-    @RequestMapping("/frame/user_right.jhtml")
-    public String userRight() {
-        return "frame/user_right";
-    }
-
-    // 辅助管理
-    @RequestMapping("/frame/support_main.jhtml")
-    public String supportMain() {
-        return "frame/support_main";
-    }
-
-    @RequestMapping("/frame/support_left.jhtml")
-    public String supportLeft() {
-        return "frame/support_left";
-    }
-
-    @RequestMapping("/frame/support_right.jhtml")
-    public String supportRight() {
-        return "frame/support_right";
-    }
-
-    // 资源管理
-    @RequestMapping("/frame/resource_main.jhtml")
-    public String resourceMain() {
-        return "frame/resource_main";
+    @RequestMapping("/frame/orders_right.jhtml")
+    public String ordersRight() {
+        return "frame/orders_right";
     }
 
 }

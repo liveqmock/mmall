@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.mm2018</groupId>
     <artifactId>mm2018</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0.0</version>
     <name>${project.artifactId}</name>
 
@@ -238,7 +238,7 @@
                         </manifest>
                     </archive>
                     <includes>
-                        <include>**/com/**</include>
+                        <include>**/net/**</include>
                         <include>**/mybatis/**</include>
                     </includes>
                     <!--<classifier>com</classifier>-->
